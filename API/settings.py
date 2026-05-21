@@ -30,7 +30,6 @@ ALLOWED_HOSTS = [".railway.app", "localhost", "127.0.0.1"]
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-n!x5mn*zb6e%!dma7jj8t@a54%#)rqv=7c^w7n$7nl&9&*my90'
 
 
 # Application definition
@@ -143,8 +142,8 @@ CORS_ALLOW_METHODS = [
     "PUT",
 ]
 
-GRAPPELLI_ADMIN_TITLE = "Waaman E‑Commerce Admin"
-GRAPPELLI_ADMIN_HEADLINE = "Waaman Control Panel"
+GRAPPELLI_ADMIN_TITLE = "mindME Mobile Application Admin"
+GRAPPELLI_ADMIN_HEADLINE = "mindME Control Panel"
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
