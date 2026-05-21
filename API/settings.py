@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'django_filters',
-    "cloudinary",
-    "cloudinary_storage",
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
