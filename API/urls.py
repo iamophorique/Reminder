@@ -23,6 +23,9 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
+    # Grappelli UI
+    path("grappelli/", include("grappelli.urls")),
+
     path('admin/', admin.site.urls),
     # Reminder app API
     path('api/', include('mindApp.urls')),
