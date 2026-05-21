@@ -23,7 +23,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "fallback-secret")
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
 # 🌍 Allowed Hosts
-ALLOWED_HOSTS = [".railway.app", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["https://reminder-o834.onrender.com", "localhost", "127.0.0.1"]
 
 
 # Quick-start development settings - unsuitable for production
@@ -116,7 +116,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8081",
     "http://127.0.0.1:8081",
     "http://192.168.100.6:8081",
-    "https://diplomatic-peace.up.railway.app"
+    "https://reminder-o834.onrender.com"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -190,5 +190,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Security settings for production
 CSRF_TRUSTED_ORIGINS = [
-    "https://yourapp.onrender.com",  # Replace with your Render domain
+    "https://reminder-o834.onrender.com",  # Replace with your Render domain
 ]
