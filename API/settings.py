@@ -9,18 +9,21 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import environ
 import os
 import dj_database_url
 from pathlib import Path
 
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()  # reads the .env file
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 🔑 Secret Key
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "fallback-secret")
+SECRET_KEY = env("DJANGO_SECRET_KEY", default="fallback-secret")
 
 # ⚙️ Debug Mode
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = env.bool("DEBUG", default=False)
 
 # 🌍 Allowed Hosts
 ALLOWED_HOSTS = ["https://reminder-o834.onrender.com", "localhost", "127.0.0.1"]
@@ -89,11 +92,7 @@ WSGI_APPLICATION = 'API.wsgi.application'
 
 # Database (Postgres via Render)
 DATABASES = {
-    "default": dj_database_url.parse(
-        os.environ.get("DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=True
-    )
+    "default": dj_database_url.parse(env("DATABASE_URL"), ssl_require=True)
 }
 
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
