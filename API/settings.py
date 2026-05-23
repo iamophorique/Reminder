@@ -92,7 +92,10 @@ WSGI_APPLICATION = 'API.wsgi.application'
 
 # Database (Postgres via Render)
 DATABASES = {
-    "default": dj_database_url.parse(env("DATABASE_URL"), ssl_require=True)
+    "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
+DATABASES["default"]["OPTIONS"] = {
+    "sslmode": "require"
 }
 
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
