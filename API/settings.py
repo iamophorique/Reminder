@@ -26,7 +26,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", default="fallback-secret")
 DEBUG = env.bool("DEBUG", default=False)
 
 # 🌍 Allowed Hosts
-ALLOWED_HOSTS = ["https://reminder-o834.onrender.com", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["https://reminder-o834.onrender.com", "127.0.0.1"]
 
 
 # Quick-start development settings - unsuitable for production
@@ -92,12 +92,12 @@ WSGI_APPLICATION = 'API.wsgi.application'
 
 # Database (Postgres via Render)
 DATABASES = {
-    "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    "default": dj_database_url.parse(
+        env("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
-DATABASES["default"]["OPTIONS"] = {
-    "sslmode": "require"
-}
-
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 REST_FRAMEWORK = {
