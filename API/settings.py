@@ -1,29 +1,21 @@
+import dj_database_url
+import environ
 import os
 from pathlib import Path
-import environ
-import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
-environ.Env.read_env()  # explicitly load .env at project root
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
-
-# Secret Key
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-secret-key") # better to load from .env
-
-# Debug
+SECRET_KEY = env("DJANGO_SECRET_KEY", default="fallback-secret")
 DEBUG = env.bool("DEBUG", default=False)
 
 DATABASES = {
-    "default": dj_database_url.parse(
-        os.environ.get("DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=True
-    )
+    "default": dj_database_url.parse(env("DATABASE_URL"), conn_max_age=600)
 }
 
-# If psycopg2 still closes SSL, add OPTIONS explicitly:
+# 🔑 Force psycopg2 to use SSL
 DATABASES["default"]["OPTIONS"] = {
     "sslmode": "require"
 }
