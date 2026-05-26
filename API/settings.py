@@ -6,11 +6,11 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))  # explicitly load .env at project root
+environ.Env.read_env()  # explicitly load .env at project root
 
 
 # Secret Key
-SECRET_KEY = env("DJANGO_SECRET_KEY", default="fallback-secret")
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-secret-key") # better to load from .env
 
 # Debug
 DEBUG = env.bool("DEBUG", default=False)
