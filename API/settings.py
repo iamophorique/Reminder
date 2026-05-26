@@ -15,6 +15,21 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "unsafe-secret-key") # better t
 # Debug
 DEBUG = env.bool("DEBUG", default=False)
 
+DATABASES = {
+    "default": dj_database_url.parse(
+        os.environ.get("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True
+    )
+}
+
+# If psycopg2 still closes SSL, add OPTIONS explicitly:
+DATABASES["default"]["OPTIONS"] = {
+    "sslmode": "require"
+}
+
+CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
+
 # Allowed Hosts
 ALLOWED_HOSTS = ["reminder-o834.onrender.com", "localhost", "127.0.0.1"]
 
@@ -79,20 +94,6 @@ WSGI_APPLICATION = 'API.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 # Database (Render Postgres with SSL enforced)
-DATABASES = {
-    "default": dj_database_url.parse(
-        os.environ.get("DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=True
-    )
-}
-
-# If psycopg2 still closes SSL, add OPTIONS explicitly:
-DATABASES["default"]["OPTIONS"] = {
-    "sslmode": "require"
-}
-
-CLOUDINARY_URL = os.environ.get("CLOUDINARY_URL")
 
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
